@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sentinel-dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sentinel-dashboard
+  template:
+    metadata:
+      labels:
+        app: sentinel-dashboard
+    spec:
+      containers:
+        - image: atjapan2015/sentinel-dashboard:1.8.4
+          imagePullPolicy: IfNotPresent
+          name: sentinel-dashboard
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8719
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "2"
+              memory: 2Gi
+            requests:
+              cpu: 200m
+              memory: 512Mi

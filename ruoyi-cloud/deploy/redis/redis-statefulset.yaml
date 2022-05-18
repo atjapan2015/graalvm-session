@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  serviceName: redis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7.0.0
+        env:
+        - name: MASTER
+          value: "true"
+        ports:
+        - name: redis
+          containerPort: 6379
+        volumeMounts:
+        - name: data
+          mountPath: /redis-master-data
+        - name: config-map
+          mountPath: /redis-master
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+      volumes:
+      - name: config-map
+        configMap:
+          name: redis-config
+          items:
+            - key: redis-config
+              path: redis.conf
+      - name: data
+        persistentVolumeClaim:
+          claimName: redis-pv-claim

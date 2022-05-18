@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sentinel-dashboard
+spec:
+  ports:
+    - port: 8718
+      protocol: TCP
+      targetPort: 8080
+      nodePort: 30718
+      name: tcp8718
+    - port: 8719
+      protocol: TCP
+      targetPort: 8719
+      nodePort: 30719
+      name: tcp8719
+  selector:
+    app: sentinel-dashboard
+  type: NodePort
