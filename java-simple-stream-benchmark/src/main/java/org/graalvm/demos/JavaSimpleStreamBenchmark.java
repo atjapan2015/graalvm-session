@@ -48,13 +48,11 @@ import org.openjdk.jmh.results.format.ResultFormatType;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-@Warmup(iterations = 1)
-@Measurement(iterations = 10)
+@Warmup(iterations = 3)
+@Measurement(iterations = 3)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Fork(1)
-//@Result("target/result.json")
-//@ResultFormat(ResultFormatType.JSON)
 public class JavaSimpleStreamBenchmark {
   static int[] values = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
   @Benchmark

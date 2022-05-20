@@ -1,5 +1,6 @@
 1. Build
 ```aidl
+source ~/.graalvm_java11
 ./mvnw clean package
 ```
 
